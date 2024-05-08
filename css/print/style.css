@@ -1,0 +1,35 @@
+.wrap {
+  display: flex;
+  width: 1500px;
+
+  background-color: gray;
+  -webkit-print-color-adjust: exact;
+}
+
+.item {
+  position: relative;
+  width: 25%;
+  height: 1000px;
+
+  border: 1px solid black;
+}
+
+.item::after {
+  content: "logo";
+  display: block;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 40px;
+}
+
+@media print {
+  .print-area {
+    display: block;
+  }
+  .non-print-area {
+    display: none;
+  }
+}
