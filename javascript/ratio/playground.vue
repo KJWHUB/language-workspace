@@ -53,4 +53,22 @@ function ratio(a, b, n) {
 .wrap-p {
   background-color: white;
 }
+
+/* 스크립트를 사용하지 않고 scss 로 적용하는 방법 */
+/* 
+$w1: 1500px;
+
+.wrap {
+  width: $w1;
+  height: 100px;
+
+  background-color: wheat;
+
+  .item {
+    width: 25%;
+    height: calc(($w1/4) * 54 / 19);
+    background-color: aqua;
+  }
+}
+ */
 </style>
