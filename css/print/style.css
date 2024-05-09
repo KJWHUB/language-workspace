@@ -1,6 +1,7 @@
 .wrap {
   display: flex;
-  width: 1500px;
+  /* width: 1500px; */
+  width: 1000px;
 
   background-color: gray;
   -webkit-print-color-adjust: exact;
@@ -31,5 +32,12 @@
   }
   .non-print-area {
     display: none;
+  }
+
+  .wrap {
+    width: 50%;
+  }
+  .item {
+    height: 500px;
   }
 }
