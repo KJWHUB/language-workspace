@@ -22,6 +22,13 @@ const main = async () => {
   const result2 = await ayfn2(1);
   console.log(result);
   console.log(result2);
+
+  try {
+    const result3 = await ayfn(2);
+    console.log(result3);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 main();
