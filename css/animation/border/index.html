@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Hover Animation with GSAP</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- vue3 cdn -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div class="card-container">
+      <svg class="card-border" viewBox="0 0 300 200" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#00bc9b" />
+            <stop offset="100%" stop-color="#5eaefd" />
+          </linearGradient>
+        </defs>
+        <rect x="5" y="5" rx="10" ry="10" width="290" height="190" />
+        <!-- <rect x="5" y="5" rx="10" ry="10" width="290" height="190" stroke="black" stroke-dasharray="0 1000" /> -->
+      </svg>
+      <div class="card">
+        <p>Hover over me!</p>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="script.js"></script>
+
+    <div id="app" class="non-print-area">
+      <div class="turbo-card" style="width: 300px; height: 300px">
+        <i aria-hidden="true"></i>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  const { createApp, ref, reactive, watchEffect, watch } = Vue;
+
+  createApp({
+    setup() {
+      return {};
+    },
+  }).mount("#app");
+</script>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app" class="non-print-area">
+      <button @click="clickBtn">click</button>
+      <button @click="증가">증가</button>
+    </div>
+  </body>
+</html>
+
+<script>
+  const { createApp, ref, reactive, watchEffect, watch } = Vue;
+
+  createApp({
+    setup() {
+      const countRef = ref({ count: 0 });
+      const countReactive = reactive({ count: 0 });
+      const countObj = { count: 0 };
+
+      const clickBtn = () => {
+        countRef.value.count = 0;
+        countReactive.count = 0;
+        countObj.count = 0;
+      };
+
+      const 증가 = () => {
+        countRef.value.count++;
+        countReactive.count++;
+        countObj.count++;
+      };
+
+      watchEffect(() => {
+        console.log("countRef", countRef.value.count);
+      });
+      watchEffect(() => {
+        console.log("countReactive", countReactive.count);
+      });
+
+      watchEffect(() => {
+        console.log("countObj", countObj.count);
+      });
+
+      watch(
+        () => countRef.value.count,
+        (newVal, oldVal) => {
+          console.log("countRef watch", newVal, oldVal);
+        }
+      );
+      watch(
+        () => countReactive.count,
+        (newVal, oldVal) => {
+          console.log("countReactive watch", newVal, oldVal);
+        }
+      );
+
+      return { clickBtn, 증가 };
+    },
+  }).mount("#app");
+</script>

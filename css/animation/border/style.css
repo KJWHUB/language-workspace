@@ -1,0 +1,139 @@
+:root {
+  --background: 0 0% 98%;
+  --foreground: 0 0% 3.9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 15.1%;
+  --card: 0 0% 99.7%;
+  --card-foreground: 0 0% 3.9%;
+  --border: 0 0% 89.8%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --accent: 0 0% 94.1%;
+  --accent-foreground: 0 0% 9%;
+  --ring: 0 0% 63.9%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.card-container {
+  position: relative;
+  width: 300px;
+  height: 200px;
+}
+
+.card-border {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  stroke: url(#gradient);
+  stroke-width: 5;
+  fill: none;
+  stroke-dasharray: 0 1000;
+  stroke-linecap: round;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* overflow: hidden; */
+  position: relative;
+}
+
+.card p {
+  margin: 0;
+  font-size: 1.5em;
+  color: #333;
+  z-index: 1;
+}
+
+svg defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.turbo-card {
+  background-color: #fff;
+  --border-radius: 12px;
+  --border-size: 1px;
+  --padding: 1px;
+  --border-bg: conic-gradient(from 180deg at 50% 50%, #e92a67 0deg, #a853ba 112.5deg, #2a8af6 228.75deg, rgba(42, 138, 246, 0) 360deg);
+  position: relative;
+  overflow: hidden;
+  font-size: 2rem;
+  padding: calc(var(--padding) + var(--border-size));
+  border-radius: var(--border-radius);
+  display: inline-block;
+
+  backface-visibility: hidden;
+  perspective: 1000;
+  transform: translateZ(0);
+}
+
+.turbo-card:hover i {
+  opacity: 1;
+}
+
+.turbo-card i {
+  content: "";
+  position: absolute;
+  top: var(--border-size);
+  right: var(--border-size);
+  bottom: var(--border-size);
+  left: var(--border-size);
+  padding: var(--border-size);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+  border-radius: calc(var(--border-radius) + var(--border-size));
+
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.turbo-card i::before {
+  content: "";
+  display: block;
+  background: var(--border-bg);
+  box-shadow: 0 0 40px 20px --var(--border-bg);
+  width: calc(100% * 1.41421356237);
+  padding-bottom: calc(100% * 1.41421356237);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 100%;
+  z-index: -2;
+  animation: _no-sidebar__spin__P8L3O 5s linear infinite;
+}
+
+@keyframes _no-sidebar__spin__P8L3O {
+  0% {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+}
