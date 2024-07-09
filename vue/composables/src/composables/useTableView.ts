@@ -1,6 +1,4 @@
-import { reactive, ref } from 'vue'
-
-import { ElMessage, type FormInstance } from 'element-plus'
+import { reactive } from 'vue'
 
 export interface Pageable {
   page: number
@@ -29,7 +27,6 @@ export const useTableView = <TListItem extends object>({
   requestHandler,
   responseHandler
 }: UseTableViewProps) => {
-  const filterFormRef = ref<FormInstance>()
   const tableData = reactive<TableViewData<TListItem>>({
     list: [],
     total: 0,
@@ -50,29 +47,16 @@ export const useTableView = <TListItem extends object>({
       tableData.list = list
       tableData.total = total
     } catch (e) {
-      console.error(e)
-      ElMessage.error('목록 조회에 실패했습니다. ' + e)
+      console.error('목록 조회에 실패했습니다. ' + e)
     } finally {
       tableData.loading = false
     }
-  }
-
-  const resetForm = (formEl: FormInstance | undefined) => {
-    if (!formEl) return
-    formEl.resetFields()
-  }
-
-  const resetFormAndFetch = () => {
-    resetForm(filterFormRef.value)
-    $fetchList()
   }
 
   return {
     tableData,
     pageQuery,
     listQuery,
-    filterFormRef,
-    $fetchList,
-    resetFormAndFetch
+    $fetchList
   }
 }
