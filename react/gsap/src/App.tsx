@@ -1,9 +1,12 @@
+import "./App.css";
+
 import { useGSAP } from "@gsap/react";
 import { useState, useRef } from "react";
 
 import gsap from "gsap";
 
-import "./App.css";
+import FlipText from "./components/FlipText";
+import { useFlipTexts } from "./hooks/useFlipTexts";
 
 const randomX = gsap.utils.random(-200, 200, 1, true);
 
@@ -23,6 +26,9 @@ function App() {
     { dependencies: [endX], scope: container }
   );
 
+  const [trigger, setTrigger] = useState(false);
+  const { texts } = useFlipTexts("HELLO");
+
   return (
     <div ref={container} className="app">
       <button onClick={() => setEndX(randomX())}>Pass in a randomized value</button>
@@ -30,6 +36,13 @@ function App() {
       <div className="box gradient-blue" ref={boxRef}>
         <p>{endX}</p>
       </div>
+
+      <section className="flip-texts">
+        <button onClick={() => setTrigger(!trigger)}>trigger</button>
+        {texts.map((text, index) => (
+          <FlipText key={index} text={text} index={index} trigger={trigger} />
+        ))}
+      </section>
     </div>
   );
 }

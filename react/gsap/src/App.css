@@ -64,3 +64,14 @@
 .gradient-blue {
   background: linear-gradient(90deg, #669fe0, rgb(119, 119, 166));
 }
+
+.flip-texts {
+  font-size: 30px;
+
+  background-color: rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
