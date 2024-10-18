@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "start": "tsc-watch --onSuccess \"node dist/index.js\""
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.6",
+    "ts-node": "^10.9.2",
+    "tsc-watch": "^6.2.0",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2"
+  }
+}
