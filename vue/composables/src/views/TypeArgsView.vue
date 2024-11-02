@@ -1,24 +1,22 @@
 <script setup lang="ts">
-import { useArray } from '@/composables/useArray'
+import { useCycleList } from '@/composables/useCycleList'
 import { ref } from 'vue'
 
-const arr = ref([1, 2, 3])
-const barr = [1, 2, 3]
-const { json } = useArray(arr)
-const { json: bjson } = useArray(barr)
+const reactiveArr = ref([1, 2, 3])
+const plainArr = [1, 2, 3]
+const retrunArr = () => [1, 2, 3]
 
-const push = () => {
-  // 정수 1 ~ 100
-  const random = Math.floor(Math.random() * 100) + 1
-  arr.value.push(random)
-}
+// const { state, prev, next } = useCycleList(reactiveArr)
+// const { state, prev, next } = useCycleList(plainArr)
+const { state, prev, next } = useCycleList(retrunArr)
 </script>
 
 <template>
   <div>
     <h1>TypeArgsView</h1>
-    <button @click="push">push</button>
-    <p>{{ json }}</p>
+    <p>state: {{ state }}</p>
+    <button @click="prev">Prev</button>
+    <button @click="next">Next</button>
   </div>
 </template>
 
