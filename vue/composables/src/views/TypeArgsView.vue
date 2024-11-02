@@ -2,14 +2,34 @@
 import { useCycleList } from '@/composables/useCycleList'
 import { ref } from 'vue'
 
-const reactiveArr = ref([1, 2, 3])
-// const plainArr = [1, 2, 3]
-// const retrunArr = () => [1, 2, 3]
+const languages = [
+  'JavaScript',
+  'TypeScript',
+  'Python',
+  'Java',
+  'C#',
+  'PHP',
+  'Ruby',
+  'Go',
+  'Swift',
+  'Kotlin'
+]
 
-const { state, prev, next } = useCycleList(reactiveArr)
-state.value = 'asdjmnk'
+const reactiveArr = ref([...languages])
+// const plainArr = [...languages]
+// const retrunArr = () => [...languages]
+
+const { state, prev, next, go } = useCycleList(reactiveArr, {
+  fallbackIndex: 0,
+  fallbackValue: languages[0]
+})
+
+state.value = 'JavaScript123'
+
 // const { state, prev, next } = useCycleList(plainArr)
 // const { state, prev, next } = useCycleList(retrunArr)
+
+const goTo = ref(0)
 </script>
 
 <template>
@@ -18,6 +38,10 @@ state.value = 'asdjmnk'
     <p>state: {{ state }}</p>
     <button @click="prev">Prev</button>
     <button @click="next">Next</button>
+    <div>
+      <input type="number" v-model="goTo" />
+      <button @click="go(goTo)">Go to</button>
+    </div>
   </div>
 </template>
 

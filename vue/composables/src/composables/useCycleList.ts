@@ -1,20 +1,40 @@
 import { computed, ref, toRef, type MaybeRefOrGetter } from 'vue'
 
-export const useCycleList = (list: MaybeRefOrGetter<any[]>) => {
-  const activeIndex = ref(0)
+export interface useCycleListConfig {
+  fallbackIndex?: number
+  fallbackValue?: any
+}
+
+const useCycleListConfigDefaults: useCycleListConfig = {
+  fallbackIndex: undefined,
+  fallbackValue: undefined
+}
+
+export const useCycleList = (list: MaybeRefOrGetter<any[]>, config?: useCycleListConfig) => {
   const _list = toRef(list)
+  const _config = {
+    ...useCycleListConfigDefaults,
+    ...config
+  }
+  const activeIndex = ref(0)
   const state = computed({
     get() {
       return _list.value[activeIndex.value]
     },
     set(value) {
       const fountIndex = _list.value.indexOf(value)
-      if (fountIndex === -1) {
-        throw new Error(
-          `{${value}} 는 useCycleList 목록에서 찾을 수 없으며 state.value = '' 로 설정할 수 없습니다.`
-        )
+      if (fountIndex >= 0) {
+        activeIndex.value = fountIndex
+      } else {
+        const foundFallbackValueIndex = _list.value.indexOf(_config.fallbackValue)
+        if (foundFallbackValueIndex === -1) {
+          throw new Error(
+            `{${value}} 는 useCycleList 목록에서 찾을 수 없으며 state.value = '' 로 설정할 수 없습니다.`
+          )
+        } else {
+          activeIndex.value = foundFallbackValueIndex
+        }
       }
-      activeIndex.value = fountIndex
     }
   })
 
@@ -36,6 +56,10 @@ export const useCycleList = (list: MaybeRefOrGetter<any[]>) => {
 
   function go(index: number) {
     if (index >= _list.value.length) {
+      if (_config.fallbackIndex !== undefined) {
+        activeIndex.value = _config.fallbackIndex
+        return
+      }
       throw new Error('Index out of bounds')
     }
     activeIndex.value = index
