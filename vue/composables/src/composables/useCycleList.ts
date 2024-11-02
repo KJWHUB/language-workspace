@@ -3,7 +3,18 @@ import { computed, ref, toRef, type MaybeRefOrGetter } from 'vue'
 export const useCycleList = (list: MaybeRefOrGetter<any[]>) => {
   const activeIndex = ref(0)
   const _list = toRef(list)
-  const state = computed(() => _list.value[activeIndex.value])
+  const state = computed({
+    get() {
+      return _list.value[activeIndex.value]
+    },
+    set(value) {
+      const fountIndex = _list.value.indexOf(value)
+      if (fountIndex === -1) {
+        throw new Error(`Value: {${value}} not found in list`)
+      }
+      activeIndex.value = fountIndex
+    }
+  })
 
   function next() {
     if (activeIndex.value === _list.value.length - 1) {

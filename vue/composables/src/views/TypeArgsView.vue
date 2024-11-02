@@ -3,12 +3,13 @@ import { useCycleList } from '@/composables/useCycleList'
 import { ref } from 'vue'
 
 const reactiveArr = ref([1, 2, 3])
-const plainArr = [1, 2, 3]
-const retrunArr = () => [1, 2, 3]
+// const plainArr = [1, 2, 3]
+// const retrunArr = () => [1, 2, 3]
 
-// const { state, prev, next } = useCycleList(reactiveArr)
+const { state, prev, next } = useCycleList(reactiveArr)
+state.value = 'asdjmnk'
 // const { state, prev, next } = useCycleList(plainArr)
-const { state, prev, next } = useCycleList(retrunArr)
+// const { state, prev, next } = useCycleList(retrunArr)
 </script>
 
 <template>
