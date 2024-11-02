@@ -1,4 +1,4 @@
-import { computed, ref, toRef, type MaybeRefOrGetter } from 'vue'
+import { computed, ref, toRef, type MaybeRefOrGetter, type Ref } from 'vue'
 
 export interface useCycleListConfig {
   fallbackIndex?: number
@@ -10,8 +10,8 @@ const useCycleListConfigDefaults: useCycleListConfig = {
   fallbackValue: undefined
 }
 
-export const useCycleList = (list: MaybeRefOrGetter<any[]>, config?: useCycleListConfig) => {
-  const _list = toRef(list)
+export const useCycleList = <T>(list: MaybeRefOrGetter<T[]>, config?: useCycleListConfig) => {
+  const _list = toRef(list) as Ref<T[]>
   const _config = {
     ...useCycleListConfigDefaults,
     ...config

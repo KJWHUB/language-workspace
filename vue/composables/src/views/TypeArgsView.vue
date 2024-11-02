@@ -24,8 +24,6 @@ const { state, prev, next, go } = useCycleList(reactiveArr, {
   fallbackValue: languages[0]
 })
 
-state.value = 'JavaScript123'
-
 // const { state, prev, next } = useCycleList(plainArr)
 // const { state, prev, next } = useCycleList(retrunArr)
 
