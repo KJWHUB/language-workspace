@@ -10,7 +10,9 @@ export const useCycleList = (list: MaybeRefOrGetter<any[]>) => {
     set(value) {
       const fountIndex = _list.value.indexOf(value)
       if (fountIndex === -1) {
-        throw new Error(`Value: {${value}} not found in list`)
+        throw new Error(
+          `{${value}} 는 useCycleList 목록에서 찾을 수 없으며 state.value = '' 로 설정할 수 없습니다.`
+        )
       }
       activeIndex.value = fountIndex
     }
